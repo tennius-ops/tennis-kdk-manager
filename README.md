@@ -36,5 +36,5 @@
 ---
 
 ## 🚀 배포 정보
-- **Hosting**: [Vercel](https://vercel.com)
-- **Repository**: [GitHub](https://github.com)
+- **Live Demo (배포 사이트)**: [https://tennis-kdk-manager.vercel.app](https://tennis-kdk-manager.vercel.app)
+- **GitHub Repository**: [https://github.com/tennius-ops/tennis-kdk-manager](https://github.com/tennius-ops/tennis-kdk-manager)
