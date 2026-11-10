@@ -1,0 +1,1209 @@
+/* ========================================================
+   🎾 국밥툴즈 스타일 테니스 KDK 대진표 매니저 CSS
+   ======================================================== */
+:root {
+  --primary-color: #0b663b; /* 윔블던 테니스 그린 */
+  --primary-light: #169357;
+  --primary-dark: #074728;
+  --accent-color: #d6f31f; /* 테니스 볼 라임 */
+  --accent-hover: #bde00d;
+  --bg-color: #f4f6f4;
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-sub: #6b7280;
+  --border-color: #e5e7eb;
+  --danger-color: #ef4444;
+  --danger-light: #fee2e2;
+  --success-color: #10b981;
+  --winner-bg: #ecfdf5;
+  --winner-border: #059669;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+  --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 상단 헤더 --- */
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  padding: 22px 20px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h1 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.logo h1 span {
+  color: var(--accent-color);
+}
+
+.tennis-ball {
+  font-size: 1.7rem;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.sub-title {
+  font-size: 0.88rem;
+  opacity: 0.88;
+  font-weight: 400;
+  flex: 1 1 100%;
+  margin-top: -4px;
+}
+
+@media (min-width: 768px) {
+  .sub-title {
+    flex: initial;
+    margin-top: 0;
+  }
+}
+
+/* --- 메인 컨테이너 --- */
+.main-container {
+  max-width: 1060px;
+  width: 100%;
+  margin: 26px auto;
+  padding: 0 16px;
+  flex: 1;
+}
+
+/* 카드 공통 */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f0f4f1;
+}
+
+.card-header h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  background-color: #e6f4ea;
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+/* --- ⚡ 대진 방식 선택 라디오 카드 (국밥툴즈 스타일) --- */
+.section-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.method-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.method-card {
+  display: block;
+  position: relative;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.method-card input[type="radio"] {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  accent-color: var(--primary-color);
+  width: 18px;
+  height: 18px;
+}
+
+.method-card:hover {
+  border-color: #93c5a6;
+  background-color: #fafffc;
+}
+
+.method-card.active {
+  border-color: var(--primary-color);
+  background-color: #f2f9f4;
+  box-shadow: 0 0 0 3px rgba(11, 102, 59, 0.12);
+}
+
+.method-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.method-card-desc {
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  line-height: 1.45;
+  padding-right: 20px;
+}
+
+/* --- 옵션 설정 그리드 --- */
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s;
+  background-color: #fbfdfb;
+}
+
+.input-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(11, 102, 59, 0.15);
+  background-color: #fff;
+}
+
+/* 1인당 경기 수 칩 버튼 그룹 (국밥툴즈 스타일) */
+.chips-radio-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip-btn {
+  padding: 10px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: #ffffff;
+  color: #374151;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chip-btn:hover {
+  border-color: #93c5a6;
+  background-color: #f4faf6;
+}
+
+.chip-btn.active {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* 숫자 입력 스텝퍼 */
+.number-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.number-input-wrapper input {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+.btn-num {
+  width: 44px;
+  height: 44px;
+  background-color: #edf3ee;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-num:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.hint-text {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+/* --- 토글 스위치 (실력별 그루핑) --- */
+.sub-option-box {
+  background-color: #f8faf8;
+  border: 1.5px solid #d9e6dc;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #cbd5e1;
+  transition: .3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.toggle-label-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+}
+
+.toggle-label-text p {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+}
+
+/* --- 참가자 명단 텍스트 영역 (국밥툴즈 스타일) --- */
+.player-roster-box {
+  background-color: #fbfdfb;
+  border: 1.5px dashed #c9ded0;
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.roster-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.roster-header label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.roster-tools {
+  display: flex;
+  gap: 6px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #1f2937;
+  outline: none;
+  resize: vertical;
+  background-color: #ffffff;
+  transition: all 0.2s;
+  margin-bottom: 6px;
+}
+
+textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(11, 102, 59, 0.12);
+}
+
+/* 실력별 그루핑 그리드 */
+.grouped-grid, .roster-ab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.group-col label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.level-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.level-badge.high { background-color: #fee2e2; color: #b91c1c; }
+.level-badge.mid { background-color: #fef3c7; color: #b45309; }
+.level-badge.low { background-color: #e0f2fe; color: #0369a1; }
+
+.setup-footer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* --- 버튼 스타일 --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-large {
+  padding: 14px 36px;
+  font-size: 1.12rem;
+  box-shadow: 0 4px 14px rgba(11, 102, 59, 0.3);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(11, 102, 59, 0.35);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
+
+.main-container .btn-outline {
+  border-color: var(--border-color);
+  color: var(--text-main);
+  background-color: #ffffff;
+}
+
+.main-container .btn-outline:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.btn-outline.danger {
+  color: var(--danger-color);
+  border-color: #fca5a5;
+}
+
+.btn-outline.danger:hover {
+  background-color: var(--danger-light);
+  border-color: var(--danger-color);
+}
+
+.btn-sm {
+  padding: 7px 13px;
+  font-size: 0.85rem;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background-color: #edf3ee;
+}
+
+.btn-text:hover {
+  background-color: #dbebe0;
+}
+
+.btn-text.danger {
+  color: var(--danger-color);
+  background-color: var(--danger-light);
+}
+
+/* --- 🌟 국밥툴즈 시그니처: 공평성 검산 요약 카드 --- */
+.fairness-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #f4fbf7 100%);
+  border: 1.5px solid #86efac;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fairness-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fairness-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.fairness-status-badge.warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.fairness-stats-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.fairness-stat-item {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #d1fae5;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fairness-stat-item .label {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+
+.fairness-stat-item strong {
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+}
+
+/* --- 대진표 탭 & 라운드 컨테이너 --- */
+.tab-menu {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-btn:hover {
+  color: var(--primary-color);
+}
+
+.tab-btn.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* 회차/라운드별 묶음 블록 (코트 2면 동시 진행) */
+.round-time-block {
+  margin-bottom: 24px;
+  background-color: #fafbfa;
+  border: 1px solid #dce8df;
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.round-time-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #cbdad0;
+}
+
+.round-time-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resting-badge {
+  font-size: 0.8rem;
+  background: #fef3c7;
+  color: #b45309;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* 개별 매치 카드 */
+.match-card {
+  background: #ffffff;
+  border: 1.5px solid #d9e3db;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+  transition: all 0.2s;
+}
+
+.match-card:hover {
+  border-color: #a8cfb4;
+  box-shadow: var(--shadow-md);
+}
+
+.match-card.finished {
+  border-color: #86efac;
+}
+
+.match-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.game-num-tag {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.court-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background-color: #edf3ee;
+  color: var(--primary-dark);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.court-tag.court-1 { background-color: #e0f2fe; color: #0369a1; }
+.court-tag.court-2 { background-color: #fef3c7; color: #b45309; }
+.court-tag.court-3 { background-color: #f3e8ff; color: #6b21a8; }
+.court-tag.court-4 { background-color: #fce7f3; color: #9d174d; }
+
+.teams-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background-color: #f8faf8;
+  border: 1px solid #e5ede7;
+  transition: all 0.2s;
+}
+
+.team-row.winner {
+  background-color: var(--winner-bg);
+  border-color: var(--winner-border);
+  font-weight: 700;
+}
+
+.team-names {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.team-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.team-row.winner .team-label {
+  background-color: #10b981;
+  color: white;
+}
+
+.player-names-text {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-input {
+  width: 52px;
+  height: 38px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border: 1.5px solid #d1d5db;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.score-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(11, 102, 59, 0.15);
+}
+
+.vs-divider {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #9ca3af;
+  margin: -3px 0;
+}
+
+/* 완료 저장 바 */
+.tournament-finish-bar {
+  margin-top: 30px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+  border: 2px dashed #86efac;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.finish-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #166534;
+}
+
+.finish-info i {
+  font-size: 2rem;
+  color: #15803d;
+}
+
+.finish-info strong {
+  font-size: 1.05rem;
+  display: block;
+}
+
+.finish-info p {
+  font-size: 0.88rem;
+  color: #1f2937;
+  opacity: 0.85;
+}
+
+/* --- 실시간 랭킹 테이블 --- */
+.ranking-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ranking-notice {
+  font-size: 0.88rem;
+  color: var(--text-sub);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.ranking-table th {
+  background-color: #f3f7f4;
+  color: #374151;
+  font-weight: 700;
+  padding: 14px 10px;
+  border-bottom: 2px solid #e1e8e3;
+  white-space: nowrap;
+}
+
+.ranking-table td {
+  padding: 13px 10px;
+  border-bottom: 1px solid #edf2ee;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.ranking-table tbody tr:hover {
+  background-color: #fbfdfb;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.rank-1 { background-color: #fef08a; color: #854d0e; box-shadow: 0 2px 4px rgba(234, 179, 8, 0.3); }
+.rank-2 { background-color: #e2e8f0; color: #475569; }
+.rank-3 { background-color: #fed7aa; color: #9a3412; }
+
+.player-name-cell {
+  font-weight: 700;
+  color: #111827;
+  text-align: left;
+  padding-left: 18px !important;
+}
+
+.win-cell {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.diff-positive {
+  color: #059669;
+  font-weight: 700;
+}
+
+.diff-negative {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* --- 모달 (히스토리 & 누적 승리 랭킹) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 850px;
+  width: 100%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: modalScale 0.25s ease;
+}
+
+@keyframes modalScale {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+.btn-close:hover {
+  color: #111827;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-tabs {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 18px;
+}
+
+.modal-tab-btn {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.modal-tab-btn.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.modal-tab-pane {
+  display: none;
+}
+
+.modal-tab-pane.active {
+  display: block;
+}
+
+.cumulative-summary {
+  background-color: #f0fdf4;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--primary-color);
+  font-size: 0.9rem;
+  color: #166534;
+}
+
+.saved-tourney-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tourney-item-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background-color: #fafbfa;
+  transition: all 0.2s;
+}
+
+.tourney-item-card:hover {
+  background-color: #ffffff;
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.tourney-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.tourney-item-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.tourney-date {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+.tourney-item-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+
+.top-winner-tag {
+  background-color: #fef08a;
+  color: #854d0e;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- 토스트 알림 --- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 2000;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* 인쇄용 최적화 */
+@media print {
+  body {
+    background: white;
+  }
+  .app-header, .action-buttons, .tab-menu, .tournament-finish-bar, .app-footer, .ranking-toolbar button {
+    display: none !important;
+  }
+  .card {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .tab-content {
+    display: block !important;
+  }
+}
